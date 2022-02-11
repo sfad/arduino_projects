@@ -4,6 +4,8 @@
    Poject Description: One LED ON at a time then
    wait 200ms then next one goes ON when it reach
    the last LED move back to other direction.
+
+   url: https://github.com/sfad/arduino_projects
 */
 
 bool isLTR = true;  //initial state from Left to Right.

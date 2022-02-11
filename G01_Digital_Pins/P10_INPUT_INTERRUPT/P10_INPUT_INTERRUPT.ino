@@ -3,6 +3,8 @@
    
    Poject Description: Read digital input on PORT #2 if HIGH then
    TURN ON ALL LEDs of PORT B otherwise TURN them OFF.
+
+   url: https://github.com/sfad/arduino_projects
 */
 
 void setup() {

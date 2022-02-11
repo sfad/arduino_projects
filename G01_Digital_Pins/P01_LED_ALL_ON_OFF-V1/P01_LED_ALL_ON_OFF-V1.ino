@@ -3,6 +3,8 @@
    
    Poject Description: all leds goes ON wait 500ms
    then goes off and wait 500ms
+
+   url: https://github.com/sfad/arduino_projects
    
    Method #1
 */

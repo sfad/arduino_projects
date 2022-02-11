@@ -4,6 +4,8 @@
    Poject Description: First LED at LEFT ON wait 200ms then
    one after another goes ON when it reach
    the last LED they goes one after another OFF.
+
+   url: https://github.com/sfad/arduino_projects
 */
 
 bool forward = true;  //initial state from Left to Right.

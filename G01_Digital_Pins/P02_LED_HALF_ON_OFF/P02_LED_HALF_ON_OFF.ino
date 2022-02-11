@@ -4,6 +4,8 @@
    Poject Description: half leds goes ON wait 500ms
    then goes off and other half of the leds goes ON wait 500ms
    and keep repeating.
+
+   url: https://github.com/sfad/arduino_projects
 */
 
 void setup() {
