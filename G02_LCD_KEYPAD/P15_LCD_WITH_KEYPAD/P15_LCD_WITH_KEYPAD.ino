@@ -38,24 +38,20 @@ Keypad kpd = Keypad(makeKeymap(keys), rowPins, colPins, ROWS, COLS);// Create th
 LiquidCrystal_I2C lcd(LCD_ADDRESS, LCD_COLUMNS, LCD_ROWS); // run ic2_scanner sketch and get the IC2
 
 String code;  //string to store the passcode.
-byte i=0; //index of current passcode key.
 bool ledsStatus[4] = { LOW, LOW, LOW, LOW }; //LEDs initial status.
 
-void setup() 
-{
+void setup() {
    lcd.backlight();
    lcd.init();
-   lcd.setCursor(0, 0);   //set the cursor to Column 3, Row 1
-   lcd.print("Passcode:");  //print to LCD.
-   DDRD = 0x0F;     //set ports from 0 - 3 as output
+   lcd.setCursor(0, 0);     //set the cursor to Column 3, Row 1
+   lcd.print("Enter Passcode:");  //print to LCD.
+   DDRD = 0x0F;       //set ports from 0 - 3 as output
 }
 
-void loop()
-{
+void loop() {
    char key = kpd.getKey();
 
-   if(key)  // makes sure a key is actually pressed
-   {
+   if(key) {  // makes sure a key is actually pressed
       if(key == '*')
    undoLastKey();
       else if(key == '#')
@@ -65,15 +61,12 @@ void loop()
       delay(200);
    }
 
-   if(i == KEY_SIZE) // if the array index is equal to the number of expected chars, compare data to master
-   {
-      if(code == PASS_CODE)
-      {
+   if(code.length() == KEY_SIZE) { // if the array index is equal to the number of expected chars, compare data to master
+      if(code == PASS_CODE) {
    lcd.setCursor(0,1);
    lcd.print("Port 0-3: ");
    char action = 0;
-   while(!action)
-   {
+   while(!action) {
       action = kpd.getKey();
       if(action == '0')
          toggleLED(0);
@@ -83,10 +76,9 @@ void loop()
          toggleLED(2);
       else if(action == '3')
          toggleLED(3);
-      else if(action)
-      {
+      else if(action) {
          lcd.setCursor(0, 1);
-         lcd.print("ONLY 0 - 3");
+         lcd.print("ERROR: 0 - 3");
          delay(1000);
          break;
       }
@@ -97,31 +89,27 @@ void loop()
   }
 }
 
-void clearCode()
-{
-   i = 0;   //set code count to 0
+void clearCode() {
    code = "";   //clear code 
    lcd.setCursor(0,1);  //set cursor to column 1 row 2
    lcd.print("               ");  //clear line 2 by writing spaces
 }
 
-void saveKey(char key)
-{
+void saveKey(char key) {
+   byte index = code.length();
    code += key;   // store char into data array
-   lcd.setCursor(i,1);  // move cursor to show each new char
+   lcd.setCursor(index, 1); // move cursor to show each new char
    lcd.print('*');  // print char at said cursor
-   i++;     // increment data array by 1 to store new char
 }
 
-void undoLastKey()
-{
-   code = code.substring(0, code.length()-1); //remove one char from string.
-   lcd.setCursor(--i, 1); //back one column
+void undoLastKey() {
+   byte index = code.length();
+   code = index == 0 ? "" : code.substring(0, --index); //remove one char from string
+   lcd.setCursor(index, 1); //back one column
    lcd.print(' ');    //clear last * from LCD.
 }
 
-void toggleLED(byte port)
-{
+void toggleLED(byte port) {
    if(port < 0 || port > 3) return;   //make sure PORT is 0 - 3
    ledsStatus[port] = !ledsStatus[port];  //invert saved state
    digitalWrite(port, ledsStatus[port]);  //apply new state to the port
