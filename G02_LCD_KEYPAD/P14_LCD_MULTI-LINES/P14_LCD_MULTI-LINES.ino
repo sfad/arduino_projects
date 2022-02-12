@@ -36,8 +36,7 @@ String lcdLines[LINES_SIZE] = {
 };
 int columnIndex = 0;
 
-void setup() 
-{
+void setup() {
    // LCD initialization
    lcd.backlight();
    lcd.init();
@@ -50,8 +49,7 @@ void setup()
    pinMode(BUTTON_UP, INPUT_PULLUP);
 }
 
-void loop()
-{
+void loop() {
    delay(200); // samll delay for debounce
    if(digitalRead(BUTTON_DOWN) == LOW)
       moveLine("down");
@@ -61,14 +59,12 @@ void loop()
 
 void moveLine(String dir) {
    int line1Index=0, line2Index=0;
-   if(dir == "down")
-   {
+   if(dir == "down") {
       if(columnIndex >= LINES_SIZE - 2) return; // Reach end line so return;
       line1Index = ++columnIndex;
       line2Index = columnIndex + 1;
    }
-   else if(dir == "up")
-   {
+   else if(dir == "up") {
       if(columnIndex <= 1) return; // Reach first line so return;
       line2Index = --columnIndex;
       line1Index = columnIndex - 1;

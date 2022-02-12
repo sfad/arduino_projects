@@ -11,8 +11,7 @@
 
 LiquidCrystal_I2C lcd(0x27, 16, 2); // run ic2_scanner sketch and get the IC2
 
-void setup() 
-{
+void setup() {
    lcd.backlight();
    lcd.init();      //intialize the LCD
    lcd.setCursor(2, 0);   //set the cursor to Column 3, Row 1
