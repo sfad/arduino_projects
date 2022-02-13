@@ -13,7 +13,7 @@
 
 void setup() {
    Serial.begin(9600);  //Initialize the terminal with 9600 baud rate
-   pinMode(9, OUTPUT);  //set PIN #9 as output
+   pinMode(LED, OUTPUT);  //set PIN #9 as output
 }
 
 void loop() {
