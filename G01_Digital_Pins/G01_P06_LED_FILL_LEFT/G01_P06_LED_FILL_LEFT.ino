@@ -17,7 +17,6 @@ void setup() {
 }
 
 void loop() {
-   //PORTB = PORTB << 1 | 1;
    PORTB = forward ? PORTB << 1 | 1 : PORTB >> 1; //is forward shift left and set the first bit otherwise shift right.
    delay(200);    //wait for 200ms (0.2 second)
    forward = PORTB == 0x3F || PORTB == 1 ? !forward : forward;  //is reach either end switch direction or don't change
