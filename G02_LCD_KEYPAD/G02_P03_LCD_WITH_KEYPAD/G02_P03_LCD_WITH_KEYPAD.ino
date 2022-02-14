@@ -53,36 +53,36 @@ void loop() {
 
    if(key) {  // makes sure a key is actually pressed
       if(key == '*')
-   undoLastKey();
+        undoLastKey();
       else if(key == '#')
-   clearCode();
+        clearCode();
       else
-   saveKey(key);
+        saveKey(key);
       delay(200);
    }
 
    if(code.length() == KEY_SIZE) { // if the array index is equal to the number of expected chars, compare data to master
       if(code == PASS_CODE) {
-   lcd.setCursor(0,1);
-   lcd.print("Port 0-3: ");
-   char action = 0;
-   while(!action) {
-      action = kpd.getKey();
-      if(action == '0')
-         toggleLED(0);
-      else if(action == '1')
-         toggleLED(1);
-      else if(action == '2')
-         toggleLED(2);
-      else if(action == '3')
-         toggleLED(3);
-      else if(action) {
-         lcd.setCursor(0, 1);
-         lcd.print("ERROR: 0 - 3");
-         delay(1000);
-         break;
-      }
-   }
+         lcd.setCursor(0,1);
+         lcd.print("Port 0-3: ");
+         char action = 0;
+         while(!action) {
+            action = kpd.getKey();
+            if(action == '0')
+               toggleLED(0);
+            else if(action == '1')
+               toggleLED(1);
+            else if(action == '2')
+               toggleLED(2);
+            else if(action == '3')
+               toggleLED(3);
+            else if(action) {
+               lcd.setCursor(0, 1);
+               lcd.print("ERROR: 0 - 3");
+               delay(1000);
+               break;
+            }
+         }
       }
 
       clearCode();
