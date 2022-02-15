@@ -22,7 +22,7 @@ void setup()
     different seed numbers each time the sketch runs.
     randomSeed() will then shuffle the random function.
   */
-  randomSeed(analogRead(0));
+  randomSeed(analogRead(A0));
 }
 
 void loop() {
