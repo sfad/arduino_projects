@@ -17,10 +17,10 @@ void setup() {
 void loop() {
    if(digitalRead(BUTTON) == LOW) {
       for(int i = 0; i < 7; i++) {
-   PORTB = 0x3F;
-   delay(300);
-   PORTB = 0;
-   delay(300);
+         PORTB = 0x3F;
+         delay(300);
+         PORTB = 0;
+         delay(300);
       }
    }
 }
