@@ -7,49 +7,58 @@
 */
 
 #define BUTTON 2
+#define CENTER_LED 7
 #define DELAY_MS 100
 
 void setup()
 {
-    DDRB = 0b00111111; // set pins 0-6 of PORT B as OUTPUT
-    pinMode(BUTTON, INPUT_PULLUP);
+  DDRB = 0b00111111; // set pins 0-6 of PORT B as OUTPUT
+  pinMode(CENTER_LED, OUTPUT);
+  pinMode(BUTTON, INPUT_PULLUP);
 
-    /*
-       if analog input pin 0 is unconnected, random analog
-       noise will cause the call to randomSeed() to generate
-       different seed numbers each time the sketch runs.
-       randomSeed() will then shuffle the random function.
-    */
-    randomSeed(analogRead(0));
+  /*
+    if analog input pin 0 is unconnected, random analog
+    noise will cause the call to randomSeed() to generate
+    different seed numbers each time the sketch runs.
+    randomSeed() will then shuffle the random function.
+  */
+  randomSeed(analogRead(0));
 }
 
 void loop() {
-  if(digitalRead(BUTTON) == LOW) {
-    startRotate();
-    PORTB = rollDice();
-  }
+  if(digitalRead(BUTTON) == LOW)
+    rollDice();
   delay(100);
 }
 
 //return bits base on random number 1-6
-byte rollDice() {
+void rollDice() {
+  PORTB = 0;
+  digitalWrite(CENTER_LED, LOW);
+  startRotate();
     int action = random(1, 7);
-    switch (action)
-    {
+    switch (action) {
       case 1:
-        return 0b00000001;
+        digitalWrite(CENTER_LED, HIGH);
+        PORTB = 0;
+        break;
       case 2:
-        return 0b00100001;
+        PORTB =  0b00100100;
+        break;
       case 3:
-        return 0b00100011;
+        digitalWrite(CENTER_LED, HIGH);
+        PORTB =  0b00100100;
+        break;
       case 4:
-        return 0b00110011;
+        PORTB =  0b00101101;
+        break;
       case 5:
-        return 0b00110111;
+        digitalWrite(CENTER_LED, HIGH);
+        PORTB =  0b00101101;
+        break;
       case 6:
-        return 0b00111111;
-      default:
-        return 0;
+        PORTB =  0b00111111;
+        break;
     }
 }
 
@@ -57,19 +66,17 @@ byte rollDice() {
   Move the leds five times before 
   each time you roll the dice.
 */
-void startRotate()
-{
-    PORTB = 1;
+void startRotate() {
+  PORTB = 1;
+  delay(DELAY_MS);
+  int i = 0;
+  while(i <= 5) {
+    PORTB = PORTB << 1;
     delay(DELAY_MS);
-    int i = 0;
-    while(i <= 5)
-    {
-        PORTB = PORTB << 1;
-        delay(DELAY_MS);
-        if (PORTB >= 0x20) {
-          PORTB = 1;
-          delay(DELAY_MS);
-              i++;
-        }
+    if (PORTB >= 0x20) {
+      PORTB = 1;
+      delay(DELAY_MS);
+      i++;
     }
+  }
 }
