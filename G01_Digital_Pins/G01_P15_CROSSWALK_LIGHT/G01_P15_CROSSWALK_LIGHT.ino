@@ -20,7 +20,7 @@ byte indexSideB = 2;  //start B walk on
 
 void setup()
 {
-    DDRB |= 0x3F; //set pins 0-6 of PORT B as OUTPUT
+  DDRB |= 0x3F; //set pins 0-6 of PORT B as OUTPUT
   DDRD |= 0xF0; //set pins 0-3 INPUT and 4-7 OUTPUT
   PORTD = 0x0C; //enable pullup on port 2 & 3
 
@@ -29,6 +29,9 @@ void setup()
   attachInterrupt(digitalPinToInterrupt(BUTTON_A), switchA, FALLING);
   attachInterrupt(digitalPinToInterrupt(BUTTON_B), switchB, FALLING);
 
+  // make a delay before enable WDT
+  // this delay help to complete all initial tasks
+  delay(1000);
   wdt_enable(WDTO_1S); //enable watch dog timer.
 }
 
