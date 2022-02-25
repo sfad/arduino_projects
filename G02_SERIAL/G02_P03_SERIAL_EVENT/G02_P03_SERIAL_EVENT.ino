@@ -12,9 +12,11 @@ void setup() {
   Serial.println("Enter some text: ");
 }
 
-void loop() {
+void loop() {}
+
+void serialEvent() {
   String data = "";
-  while(Serial.available()) {
+    while(Serial.available()) {
     data = Serial.readString(); //read the incoming data as string
     Serial.print("You entered: ");
     Serial.println(data);       //print string to serial mointor
