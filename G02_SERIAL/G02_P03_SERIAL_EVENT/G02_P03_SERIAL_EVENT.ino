@@ -8,17 +8,17 @@
 */
 
 void setup() {
-  Serial.begin(9600);
-  Serial.println("Enter some text: ");
+    Serial.begin(9600);
+    Serial.println("Enter some text: ");
 }
 
 void loop() {}
 
 void serialEvent() {
-  String data = "";
-    while(Serial.available()) {
-    data = Serial.readString(); //read the incoming data as string
-    Serial.print("You entered: ");
-    Serial.println(data);       //print string to serial mointor
-  }
+    String data = "";
+    while (Serial.available()) {
+        data = Serial.readString();  // read the incoming data as string
+        Serial.print("You entered: ");
+        Serial.println(data);  // print string to serial mointor
+    }
 }
