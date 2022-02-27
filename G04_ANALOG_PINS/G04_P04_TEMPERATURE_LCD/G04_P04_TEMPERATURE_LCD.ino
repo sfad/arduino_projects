@@ -52,6 +52,6 @@ void printTemp(char mode) {
 }
 
 void clearLine2() {
-    lcd.setCursor(2, 1);            // set the cursor to Column 3, Row 2
+    lcd.setCursor(0, 1);            // set the cursor to Column 3, Row 2
     lcd.print("                ");  // print 16 spaces to LCD
 }

@@ -118,7 +118,7 @@ void ButtonB_Pressed() {
   }
 }
 
-bool AsyncWait(char side, int seconds) {
+bool AsyncWait(char side, unsigned int seconds) {
   bool reached = false;
   byte sideIndex = side == 'b' ? 1 : 0;
   if(lastMillis[sideIndex] == 0) {
